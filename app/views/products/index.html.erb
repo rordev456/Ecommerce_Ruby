@@ -1,0 +1,38 @@
+
+<div class="column ">
+<h1>Products (<%= @products.count %>)</h1>
+<br>
+
+<% if @products.empty? %>
+  <p>Woops... there aren't any products!</p>
+<% else %>
+  <% @search_results.each do |product|%>
+      <div class="products_images">
+        <div class="card-image">
+          <figure class="image is-128x128">
+              <% if product.image.present? %>
+              <p><%= link_to( image_tag(product.thumbnail), product) %></p>
+              <% end %>
+            </figure>
+        </div>
+      </div>
+  <div class="card-content">
+    <p class="title is-4"><%= link_to(product.product_name, product) %></p>
+    <h2 class="subtitle is-6"><%= number_to_currency product.unit_price %></h2>
+            <% if @cart.include?(product)%>
+              <%= link_to 'product is in your cart. - remove', remove_from_cart_path(product), method: :delete  %>
+            <% else %>
+              <%= form_tag(add_to_cart_path(product.id, :query), method: :post, local: true) do %>
+                <p><%= label_tag(:query, "Quantity:")%></p>
+                <p><%= number_field_tag :query ,1, min: 1%></p>
+                <p><%= submit_tag 'add to cart', class:"button is-primary"%></p>
+              <% end %>
+            <% end %>
+            </div>
+        </div>
+          <% end %>
+        <% end %>
+        </div>
+
+<%= link_to "#{current_order.order_details.size} items with a value of #{current_order.subtotal}$", carts_path %>
+<%= will_paginate @search_results %>

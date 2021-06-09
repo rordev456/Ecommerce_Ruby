@@ -1,0 +1,14 @@
+<% flash.each do |name, message| %>
+  <%= content_tag :div, message, class: name %>
+<% end %>
+<br />
+<% if @products.present? %>
+  <% @products.each do |product| %>
+    <ul>
+      <li><%=link_to(product.product_name, product)%></li>
+      <%# <li><%=image_tag(url_for(product.product_image), alt:"product_image", :size => "520x360")%>
+      <li><%= image_tag url_for(product.thumbnail) , alt:"product_image"%></li>
+      <li>CAN $<%= number_with_precision(product.unit_price, :precision => 2, :delimiter => ',') %>
+    </ul>
+  <% end %>
+<% end %>

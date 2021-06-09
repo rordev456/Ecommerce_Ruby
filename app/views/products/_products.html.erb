@@ -1,0 +1,19 @@
+<% if @cart.include?(@product)%>
+  <br />
+   <%= form_tag(remove_from_cart_path(@product.id), method: "delete", local: true) do %>
+      <%= submit_tag("Remove from cart", class:"button is-danger") %>
+  <% end %>
+
+  <% else %>
+  <br />
+    <%= form_tag(add_to_cart_path(@product.id, :query), method: "post", local: true) do %>
+    <%= label_tag(:query, "Quantity:") %>
+    <div class="quantity_in_products">
+      <%= number_field_tag(:query,"1", min: 1) %>
+    </div>
+      <br />
+      <%= submit_tag("Buy", class:"button is-danger") %>
+
+
+    <% end %>
+<% end %>

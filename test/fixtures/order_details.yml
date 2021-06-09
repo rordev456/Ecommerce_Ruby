@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  unit_price: 9.99
+  quantity: 1
+  tax_rate: 9.99
+  order: one
+  product: one
+
+two:
+  unit_price: 9.99
+  quantity: 1
+  tax_rate: 9.99
+  order: two
+  product: two

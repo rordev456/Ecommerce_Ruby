@@ -1,0 +1,76 @@
+<div class="box">
+   <div class="content">
+    <h1 class="title">Checkout</h1>
+      <div class="columns is-mobile">
+        <div class="column">
+          Product Name
+        </div>
+
+        <div class="column">
+          Price
+        </div>
+
+        <div class="column">
+          Quantity
+        </div>
+
+        <div class="column">
+          Subtotal
+        </div>
+      </div>
+
+      <% count = 0 %>
+      <% total = 0 %>
+      <% @cart.each do |product| %>
+      <div class="columns is-mobile">
+        <div class="column">
+          <p><%= product.product_name %></p>
+        </div>
+
+        <div class="column">
+          <p>$<%=product.unit_price %></p>
+        </div>
+
+        <div class="column">
+          <%= @quantity[count] %>
+          </div>
+
+        <div class="column">
+          <%= number_to_currency(product.unit_price * @quantity[count]) %>
+          <% total = total + (product.unit_price * @quantity[count]) %>
+        </div>
+        <hr/>
+        </div>
+
+        <% count += 1 %>
+
+        <% end %>
+
+        <hr />
+
+        <div class="columns is-mobile">
+          <div class="column is-4 is-offset-8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PST: <%=number_to_currency(pst = (total * 1.07 ) - total )%></div>
+        </div>
+
+        <div class="columns is-mobile">
+          <div class="column is-4 is-offset-8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GST: <%=number_to_currency(gst = (total * 1.05) - total )%></div>
+        </div>
+
+        <div class="columns is-mobile">
+          <div class="column is-4 is-offset-8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HST: <%=number_to_currency(hst = 0)%></div>
+        </div>
+
+        <div class="columns is-mobile">
+          <div class="column is-4 is-offset-8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Total:</b> <%=number_to_currency(total + pst + gst + hst)%></div>
+        </div>
+
+        <div class="columns is-mobile">
+          <div class="column is-4 is-offset-8"><%= submit_tag("Checkout", class:"button is-primary") %></div>
+        </div>
+  </div>
+
+  <% @orders.each do |order|%>
+<%= hello order.id%>
+<% end %>
+</div>
+

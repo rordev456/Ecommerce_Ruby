@@ -1,0 +1,60 @@
+
+<!-- Shopping Cart -->
+            <% url = request.path_info %>
+            <% if url.include?('about_us') || url.include?('faq') || url.include?('users') || url.include?('categories') ||  url.include?('order') %>
+
+            <%else %>
+            <div class="shopping_cart">
+              <div class="dropdown is-hoverable">
+                <div class="dropdown-trigger">
+                  <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                    <span class="icon has-text-info"><i class="fas fa-shopping-cart"></i>&nbsp;<%=@cart.count%> </span>
+                    <span class="icon is-small">
+                      <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </button>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                  <div class="dropdown-content">
+                    <div class="dropdown-item">
+                      <p>There are <%= pluralize(@cart.count, 'item') %> in the cart.</p>
+                        <% count = 0 %>
+                        <% @cart.each do |product| %>
+                              <%=image_tag(url_for(product.product_image), alt:"product_image") %>
+                                  <%= product.product_name %>
+
+                                  <%= form_tag(edit_cart_path(product.id, :query), method: "post") do %>
+                                  <%= label_tag(:query, "") %>
+                                  <div class="quantity">
+                                    <%= number_field_tag(:query, @quantity[count],  min: 1) %>
+                                  </div>
+                                  <br />
+                                  <div class="field is-grouped">
+                                    <div class="control">
+                                      <%= button_tag(type: "submit", class:"button is-primary") do %>
+                                        <i class="fas fa-pen"></i>
+                                      <% end %>
+                                    </div>
+                                    </div>
+                                  <% end %>
+
+                                    <%= form_tag(remove_from_cart_path(product.id), method: "delete", local: true) do %>
+                                      <div class="control">
+                                        <%= button_tag(type: "submit", class:"button is-primary") do %>
+                                            <i class="fas fa-trash-alt"></i>
+                                        <% end %>
+
+                                      </div>
+                                    </div>
+<% end %>
+                            <br />
+                          <% count += 1%>
+                        <% end %>
+                        <%= link_to("Proceed checkout", orders_path ,class:"button is-primary") %>
+                        <%# <%= link_to("Proceed checkout", orders_path ,class:"button is-primary") %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>

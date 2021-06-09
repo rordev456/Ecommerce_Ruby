@@ -1,0 +1,108 @@
+.link_style li{
+  text-decoration: none;
+}
+
+.search_bar select{
+  width: 14.8%;
+  position: static;
+  margin-left: 1px;
+  height: 38px;
+  float: left;
+}
+
+.search_bar input[type=text] {
+  width: 80%;
+  position: relative;
+  float: left;
+}
+
+
+.search_bar button{
+  position: relative;
+  float: right;
+  margin-top: -41px;
+  margin-right: 1px;
+  width: 5%;
+  height: 40px;
+}
+
+/* unvisited link /
+a:link {
+  color: rgb(177, 70, 70);
+}
+
+/ visited link /
+a:visited {
+  color: rgb(177, 70, 70);
+}
+
+/ mouse over link /
+a:hover {
+  color: rgb(177, 70, 70);
+}
+
+/ selected link */
+a:active {
+  color: rgb(177, 70, 70);
+}
+
+.shopping_cart{
+  margin-right: 10px;
+}
+
+.filter{
+  display:inline;
+}
+
+.filter h5{
+  margin-left: 25px;
+  display: inline;
+}
+
+.filter input[type=radio]{
+  margin-left: 25px;
+}
+
+.filter button{
+  height: 25px;
+  margin-left: 10px;
+}
+
+.quantity{
+  margin-left: 27px;
+}
+
+.quantity input[type=number]{
+  width: 30px;
+}
+
+.quantity_in_products input[type=number]{
+  width: 35px;
+  position: relative;
+}
+
+.products_images{
+  padding: 10px;
+}
+
+.product_images{
+  padding: 10px;
+}
+
+.category_images{
+  padding: 10px;
+}
+
+.search_images{
+  padding: 10px;
+}
+
+.button_1, .button_2 {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.quantity_checkout input[type=number]{
+  width: 40px;
+  height: 40px;
+}

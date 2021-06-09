@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+    <title>Proj2Crm</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+    <header>
+
+    <!-- Navigation -->
+      <nav class="navbar is-primary" aria-label="main navigation">
+          <div class="navbar-brand">
+            <h1 class="navbar-item">
+              3EGGS
+            </h1>
+
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+          </div>
+
+          <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <div class="navbar-item has-dropdown is-hoverable">
+                  <a class="navbar-link">
+                    Navigation
+                  </a>
+
+                  <div class="navbar-dropdown">
+            <%= link_to('Home', '/products', class:"navbar-item")%>
+            <%= link_to('About', permalink_path(permalink: 'about_us'), class:"navbar-item")%>
+            <%= link_to('FAQs', permalink_path(permalink: 'faq'), class:"navbar-item") %>
+          <hr class="navbar-divider">
+        </div>
+      </div>
+    </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+            <%= render 'layouts/alerts' %>
+            <%= render 'layouts/cart' %>
+            <%= render 'layouts/sign_in_out' %>
+      </nav>
+
+    </header>
+  <br/>
+    <!-- Filter -->
+      <% url = request.path_info %>
+            <% if url.include?('about_us') || url.include?('faq') || url.include?('users') || url.include?('categories') || url.include?('order')%>
+
+            <%else %>
+      <div class="filter">
+        <%= form_tag products_path, :method => 'get' do%>
+          <div class="control">
+            <%= radio_button_tag 'New', :option, "New"%>
+            <%= label_tag 'New', nil, class: "radio"%>
+
+            <%= radio_button_tag 'Updated', :option, "Updated" %>
+            <%= label_tag 'Updated', nil, class: "radio"%>
+            <%= button_tag(type: "submt", class:"button is-primary") do %>
+              <i class="fas fa-filter"></i>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <% end %>
+
+    <!-- Search -->
+        <% url = request.path_info %>
+            <% if url.include?('about_us') || url.include?('faq') || url.include?('users') || url.include?('categories') || url.include?('order')%>
+
+            <%else %>
+        <div class ="search_bar">
+          <%= form_tag(search_results_products_path, method: "get", local: true, class:"") do %>
+            <div class="field">
+              <div class="control">
+                <%= text_field_tag(:query, "Search", class:"input is-primary") %>
+             </div>
+            </div>
+          <%= collection_select :product, :category_id, Category.all, :id, :name, prompt: true%>
+          <div class="control">
+            <%= button_tag(type: "submit",  class: "button is-primary") do %>
+              <i class="fas fa-search"></i>
+            <% end %>
+          </div>
+         <% end %>
+        </div>
+        <%end%>
+
+    <%= yield %>
+
+    <!-- Footer -->
+      <footer class="footer">
+      <div class="content has-text-centered">
+        <span class="icon is-large">
+          <i class="fab fa-instagram has-text-black-bis"></i> &nbsp;&nbsp;&nbsp;
+          <i class="fab fa-facebook has-text-info"></i> &nbsp;&nbsp;&nbsp;
+          <i class="fab fa-snapchat-square has-text-warning"></i> &nbsp;&nbsp;&nbsp;
+          <i class="fab fa-youtube has-text-danger"></i> &nbsp;&nbsp;&nbsp;
+        </span>
+        <p>Rights Reserved | Adelaide Building | 63 Vermillion St., Atanak, MB | Contact me: (204) 123-0000 </p>
+      </div>
+      </footer>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js%22%3E"> </script>
+    <script type="text/javascript">
+      (function() {
+        var burger = document.querySelector('.burger');
+        var nav = document.querySelector('#'+burger.dataset.target);
+        burger.addEventListener('click', function(){
+          burger.classList.toggle('is-active');
+          nav.classList.toggle('is-active');
+        });
+      })();
+    </script>
+  </body>
+</html>

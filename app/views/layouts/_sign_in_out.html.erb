@@ -1,0 +1,12 @@
+
+            <% if current_user %>
+                <%=link_to 'Sign out', destroy_user_session_path, method: :delete, class: "button is-link is-light" %>
+            <% else %>
+
+            <%=link_to 'Sign up', new_user_registration_path, class:"button is-primary is-light" %>&nbsp;
+            <%=link_to 'Sign in', new_user_session_path, class: "button is-link is-light" %>
+            <% end %>
+              </div>
+            </div>
+          </div>
+        </div>

@@ -1,0 +1,15 @@
+<nav class="breadcrumb is-right" aria-label="breadcrumbs">
+  <ul>
+    <li><%= link_to 'Product',  products_path %></li>
+    <li class="is-active"><%= link_to 'Categories', categories_path %></li>
+  </ul>
+</nav>
+Shop by Category:
+
+<% @categories.each do |category| %>
+<ul>
+    <li>
+    <%= link_to category.name, category %> (<%= category.products.count %> products)
+    </li>
+  </ul>
+<% end %>

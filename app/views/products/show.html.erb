@@ -1,0 +1,23 @@
+<nav class="breadcrumb is-right" aria-label="breadcrumbs">
+  <ul>
+    <li><%=link_to "Products", products_path %></li>
+    <li><%=@product.product_name%></li>
+  </ul>
+</nav>
+<h1>Product: <%= @product.product_name %> </h2>
+<p>Category:<%= @product.category.name %></p>
+
+<li><%= link_to @product.category.name, @product.category %></li>
+<%= image_tag(url_for(@product.product_image), :size => "520x360") %>
+<%= render 'products/products'%>
+
+
+
+
+
+
+
+
+
+
+
